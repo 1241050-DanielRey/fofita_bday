@@ -76,21 +76,23 @@
     }
 
     .modal-content {
-        width: 80%;
-        max-width: 800px;
-        height: 400px;
+    width: 80%;
+    max-width: 800px;
+    height: 400px;
 
-        background: white;
-        border-radius: 12px;
-        overflow: hidden;
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
 
-        display: flex;
+    display: flex;
 
-        /* default animation state */
-        transform: scale(0.7);
-        opacity: 0;
-        animation: popIn 0.35s forwards;
+    /* start state */
+    opacity: 0;
+    transform: translateY(25px);
+
+    animation: floatIn 0.45s ease-out forwards;
     }
+
 
     /* left video side */
     .modal-left {
@@ -126,17 +128,17 @@
         border-radius: 6px;
     }
 
-    /* ANIMATION */
-    @keyframes popIn {
-        from {
-            transform: scale(0.6);
-            opacity: 0;
-        }
-        to {
-            transform: scale(1);
-            opacity: 1;
-        }
+    /* soft float in animation */
+@keyframes floatIn {
+    from {
+        opacity: 0;
+        transform: translateY(25px);
     }
+    to {
+        opacity: 1;
+        transform: translateY(0px);
+    }
+}
 </style>
 </head>
 
@@ -197,8 +199,17 @@ const content = {
 };
 
 function openModal(id) {
+    const modal = document.getElementById("modal");
+    const box = document.querySelector(".modal-content");
+
     document.getElementById("modal-text").innerText = content[id];
-    document.getElementById("modal").style.display = "flex";
+
+    modal.style.display = "flex";
+
+    // reset animation trick
+    box.style.animation = "none";
+    box.offsetHeight; // force reflow
+    box.style.animation = "floatIn 0.45s ease-out forwards";
 }
 
 function closeModal() {
