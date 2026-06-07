@@ -6,24 +6,34 @@
 <title>Birthday Invite</title>
 
 <style>
+    /* basic reset */
     body {
         margin: 0;
         font-family: Arial, sans-serif;
-        background: url("background.png") no-repeat center center fixed;
-        background-size: cover;
-        height: 100vh;
-        overflow: hidden;
+        background: #000; /* fallback */
     }
 
-    /* container for buttons */
-    .buttons {
-        position: absolute;
-        bottom: 30px;
+    /* this is your full "poster" */
+    .page {
         width: 100%;
+    }
+
+    /* background behaves like an IMAGE, not a CSS background */
+    .background {
+        width: 100%;
+        height: auto;
+        display: block;
+    }
+
+    /* button area sits BELOW image, inside page flow */
+    .buttons {
         display: flex;
         justify-content: center;
-        gap: 10px;
         flex-wrap: wrap;
+        gap: 10px;
+
+        padding: 20px 10px 40px 10px;
+        background: rgba(255,255,255,0.05);
     }
 
     /* icon buttons */
@@ -43,7 +53,7 @@
         background: white;
     }
 
-    /* popup background */
+    /* popup overlay */
     .modal {
         display: none;
         position: fixed;
@@ -52,6 +62,7 @@
         width: 100%;
         height: 100%;
         background: rgba(0,0,0,0.6);
+
         justify-content: center;
         align-items: center;
     }
@@ -61,7 +72,7 @@
         background: white;
         padding: 20px;
         border-radius: 10px;
-        width: 80%;
+        width: 85%;
         max-width: 500px;
         text-align: center;
     }
@@ -80,24 +91,31 @@
 
 <body>
 
-<!-- BUTTONS -->
-<div class="buttons">
+<div class="page">
 
-    <button class="btn" onclick="openModal(1)">🍕</button>
-    <button class="btn" onclick="openModal(2)">🎮</button>
-    <button class="btn" onclick="openModal(3)">🎂</button>
-    <button class="btn" onclick="openModal(4)">🎁</button>
-    <button class="btn" onclick="openModal(5)">📍</button>
-    <button class="btn" onclick="openModal(6)">🕒</button>
-    <button class="btn" onclick="openModal(7)">🚪</button>
-    <button class="btn" onclick="openModal(8)">📜</button>
-    <button class="btn" onclick="openModal(9)">🎉</button>
-    <button class="btn" onclick="openModal(10)">💃</button>
-    <button class="btn" onclick="openModal(11)">😈</button>
+    <!-- YOUR BACKGROUND IMAGE -->
+    <img src="background.png" class="background" />
+
+    <!-- BUTTONS AT THE BOTTOM -->
+    <div class="buttons">
+
+        <button class="btn" onclick="openModal(1)">🍕</button>
+        <button class="btn" onclick="openModal(2)">🎮</button>
+        <button class="btn" onclick="openModal(3)">🎂</button>
+        <button class="btn" onclick="openModal(4)">🎁</button>
+        <button class="btn" onclick="openModal(5)">📍</button>
+        <button class="btn" onclick="openModal(6)">🕒</button>
+        <button class="btn" onclick="openModal(7)">🚪</button>
+        <button class="btn" onclick="openModal(8)">📜</button>
+        <button class="btn" onclick="openModal(9)">🎉</button>
+        <button class="btn" onclick="openModal(10)">💃</button>
+        <button class="btn" onclick="openModal(11)">😈</button>
+
+    </div>
 
 </div>
 
-<!-- MODALS -->
+<!-- MODAL -->
 <div id="modal" class="modal">
     <div class="modal-content">
         <div id="modal-text">Content</div>
@@ -108,7 +126,7 @@
 
 <script>
 const content = {
-    1: "🍕 Food section (add image/video here later)",
+    1: "🍕 Food section",
     2: "🎮 Games section",
     3: "🎂 Birthday vibes",
     4: "🎁 Surprise!",
@@ -118,7 +136,7 @@ const content = {
     8: "📜 Party rules",
     9: "🎉 Celebration info",
     10: "💃 Dancing section",
-    11: "😈 Secret final message"
+    11: "😈 Secret message"
 };
 
 function openModal(id) {
