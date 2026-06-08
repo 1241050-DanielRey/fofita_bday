@@ -86,12 +86,9 @@
 
     display: flex;
 
-    /* start state */
-    opacity: 0;
-    transform: translateY(25px);
-
-    animation: floatIn 0.45s ease-out forwards;
-    }
+    opacity: 1;
+    transform: translateY(0px);
+}
 
 
     /* left video side */
@@ -137,6 +134,16 @@
     to {
         opacity: 1;
         transform: translateY(0px);
+    }
+}
+    @keyframes floatOut {
+    from {
+        opacity: 1;
+        transform: translateY(0px);
+    }
+    to {
+        opacity: 0;
+        transform: translateY(25px);
     }
 }
 </style>
@@ -206,14 +213,26 @@ function openModal(id) {
 
     modal.style.display = "flex";
 
-    // reset animation trick
+    // reset + play open animation
     box.style.animation = "none";
-    box.offsetHeight; // force reflow
+    box.offsetHeight;
     box.style.animation = "floatIn 0.45s ease-out forwards";
 }
 
 function closeModal() {
-    document.getElementById("modal").style.display = "none";
+    const modal = document.getElementById("modal");
+    const box = document.querySelector(".modal-content");
+
+    // play exit animation
+    box.style.animation = "floatOut 0.35s ease-in forwards";
+
+    // wait for animation to finish before hiding
+    setTimeout(() => {
+        modal.style.display = "none";
+
+        // reset so next open works cleanly
+        box.style.animation = "none";
+    }, 350);
 }
 </script>
 
