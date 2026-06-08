@@ -211,11 +211,12 @@
         <button class="close" onclick="closeModal()">X</button>
 
         <div class="modal-left">
-            VIDEO HERE
+            <video id="popupVideo" width="100%" height="100%" controls></video>
         </div>
 
-        <div class="modal-right" id="modal-text">
-            TEXT HERE
+        <div class="modal-right">
+            <div id="modal-title"></div>
+            <div id="modal-body"></div>
         </div>
 
     </div>
@@ -223,28 +224,76 @@
 
 <script>
 const content = {
-    1: "Star section",
-    2: "Dance section",
-    3: "Music section",
-    4: "Clothes section",
-    5: "Talking section",
-    6: "Language section",
-    7: "Signal section",
-    8: "Burger section",
-    9: "Book section",
-    10: "Target section",
-    11: "Gift section"
+    1: {
+        video: "videos/metal.mp4",
+        title: "VAMOS A ROCKEAR!!",
+        body: "😝😝😝"
+    },
+    2: {
+        video: "videos/nosferatu.mp4",
+        title: "Vamos a bailar :b",
+        body: "💃💃💃💃"
+    },
+    3: {
+        video: "videos/n33.mp4",
+        caption: "Vamos a esuchar música de calidad🔥"
+    },
+    4: {
+        video: "videos/asiComo.mp4",
+        caption: "No hay código de vestimenta, pueden ser Carlos. 👍"
+    },
+    5: {
+        video: "videos/cartman.mp4",
+        caption: "Todo tipo de chiste está permitido.👍"
+    },
+    6: {
+        video: "videos/polo.mp4",
+        caption: "Me hablan en español o SE LARGAN.‼️‼️"
+    },
+    7: {
+        video: "videos/xfactor.mp4",
+        caption: "Vamos a cantar!!🎤🎤"
+    },
+    8: {
+        video: "videos/finn.mp4",
+        title: "MENU: Choripan.", 
+        body: "Qué es un choripan? Un chorizo dentro de un pan. Una bendición.🫦"
+    },
+    9: {
+        video: "videos/profvenezuela.mp4",
+        title: "Acuérdense de la cartelera de foami con los 12 valores.",
+        body: "Si hay algún desacuerdo, por decreto real, habrá una pelea de pulgares.👍👍"
+    },
+    10: {
+        video: "videos/mcdonalds.mp4",
+        title: "La musica está estrictamente bajo el control de la cumpleañera‼️‼️⚠️⚠️.", 
+        body: "El/la que ose poner canciones sin permiso y además, nicherías como bad bunny, manuel chorizo o un vallenato, se queda sin torta y sin choripan."
+    },
+    11: {
+        video: "videos/keyboardcat.mp4",
+        title: "Los regalos no son necesarios!!",
+        body: "Su presencia es el mayor regalo que la cumpleañera podría tener en su día especial, los quiere mucho a todos <3"
+    }
 };
 
 function openModal(id) {
     const modal = document.getElementById("modal");
     const box = document.querySelector(".modal-content");
+    const video = document.getElementById("popupVideo");
 
-    document.getElementById("modal-text").innerText = content[id];
+    const data = content[id];
+
+    // title + body
+    document.getElementById("modal-title").innerText = data.title;
+    document.getElementById("modal-body").innerText = data.body;
+
+    // video (unchanged)
+    video.src = data.video;
+    video.currentTime = 0;
+    video.play();
 
     modal.style.display = "flex";
 
-    // reset + play open animation
     box.style.animation = "none";
     box.offsetHeight;
     box.style.animation = "floatIn 0.45s ease-out forwards";
@@ -253,15 +302,15 @@ function openModal(id) {
 function closeModal() {
     const modal = document.getElementById("modal");
     const box = document.querySelector(".modal-content");
+    const video = document.getElementById("popupVideo");
 
-    // play exit animation
+    video.pause();
+    video.src = "";
+
     box.style.animation = "floatOut 0.35s ease-in forwards";
 
-    // wait for animation to finish before hiding
     setTimeout(() => {
         modal.style.display = "none";
-
-        // reset so next open works cleanly
         box.style.animation = "none";
     }, 350);
 }
