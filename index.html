@@ -126,14 +126,28 @@
 
     /* right caption side */
     .modal-right {
-        flex: 1;
-        padding: 20px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 18px;
-        text-align: center;
-    }
+    flex: 1;
+    padding: 20px;
+
+    display: flex;
+    flex-direction: column;  /* 🔥 THIS is the missing piece */
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+    gap: 10px;
+}
+
+    #modal-title {
+    font-size: 22px;
+    font-weight: bold;
+}
+
+#modal-body {
+    font-size: 16px;
+    font-weight: normal;
+    opacity: 0.85;
+}
 
     /* close button */
     .close {
@@ -236,23 +250,28 @@ const content = {
     },
     3: {
         video: "videos/n33.mp4",
-        caption: "Vamos a esuchar música de calidad🔥"
+        title: "Vamos a esuchar música de calidad🔥",
+        body: ""
     },
     4: {
         video: "videos/asiComo.mp4",
-        caption: "No hay código de vestimenta, pueden ser Carlos. 👍"
+        title: "No hay código de vestimenta, pueden ser Carlos. 👍",
+        body: ""
     },
     5: {
         video: "videos/cartman.mp4",
-        caption: "Todo tipo de chiste está permitido.👍"
+        title: "Todo tipo de chiste está permitido.👍",
+        body: ""
     },
     6: {
         video: "videos/polo.mp4",
-        caption: "Me hablan en español o SE LARGAN.‼️‼️"
+        title: "Me hablan en español o SE LARGAN.‼️‼️",
+        body: ""
     },
     7: {
         video: "videos/xfactor.mp4",
-        caption: "Vamos a cantar!!🎤🎤"
+        title: "Vamos a cantar!!🎤🎤",
+        body: ""
     },
     8: {
         video: "videos/finn.mp4",
