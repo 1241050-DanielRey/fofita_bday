@@ -59,29 +59,43 @@
 
     /* button base */
     .btn {
-        position: absolute;
-        width: 52px;
-        height: 52px;
-        border-radius: 50%;
-        border: none;
-        font-size: 22px;
-        cursor: pointer;
+    position: absolute;
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    border: none;
+    font-size: 22px;
+    cursor: pointer;
 
-        background: #c9a0ff; /* light purple */
-        color: white;
+    background: #c9a0ff;
+    color: white;
 
-        display: flex;
-        align-items: center;
-        justify-content: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
-        transition: 0.25s ease;
-        box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    transition: transform 0.25s ease;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+}
+
+/* hover triggers breathing animation */
+.btn:hover {
+    animation: breathe 1.4s ease-in-out infinite;
+}
+    @keyframes breathe {
+    0% {
+        transform: scale(1);
+        box-shadow: 0 0 0px rgba(201,160,255,0.4);
     }
-
-    .btn:hover {
+    50% {
         transform: scale(1.15);
-        background: #b184ff;
+        box-shadow: 0 0 18px rgba(201,160,255,0.9);
     }
+    100% {
+        transform: scale(1);
+        box-shadow: 0 0 0px rgba(201,160,255,0.4);
+    }
+}
 
     /* ===== POPUP ===== */
 
@@ -103,14 +117,20 @@
     max-width: 800px;
     height: 400px;
 
-    background: white;
-    border-radius: 12px;
-    overflow: hidden;
-
     display: flex;
 
-    opacity: 1;
-    transform: translateY(0px);
+    border-radius: 16px;
+
+    /* glass effect */
+    background: rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+
+    border: 1px solid rgba(255, 255, 255, 0.2);
+
+    overflow: hidden;
+
+    color: white;
 }
 
 
@@ -333,6 +353,11 @@ function closeModal() {
         box.style.animation = "none";
     }, 350);
 }
+    document.getElementById("modal").addEventListener("click", function (e) {
+    if (e.target === this) {
+        closeModal();
+    }
+});
 </script>
 
 </body>
